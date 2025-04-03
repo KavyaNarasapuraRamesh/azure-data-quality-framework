@@ -1,0 +1,79 @@
+{
+  "validationId": "a3eb9343-1ce5-495f-aa25-1fecee90e3bd",
+  "runId": "20250331233347",
+  "datasetName": "ban",
+  "validationDate": "2025-03-31 23:34:50",
+  "inputMetrics": {
+    "dirtyCompleteness": 100.0,
+    "remediatedCompleteness": 100.0,
+    "dirtyNullCount": 0,
+    "remediatedNullCount": 0,
+    "issuesFixed": 0,
+    "remainingIssues": 0
+  },
+  "validationMetrics": {
+    "completenessScore": 40.0,
+    "columnCompletenessScore": 20.0,
+    "typeConsistencyScore": 12.222222222222223,
+    "outlierScore": 8.864027538726335,
+    "valueConsistencyScore": 10.0
+  },
+  "columnMetrics": {
+    "columnCompleteness": {
+      "age": 100.0,
+      "job": 100.0,
+      "marital": 100.0,
+      "education": 100.0,
+      "default": 100.0,
+      "balance": 100.0,
+      "housing": 100.0,
+      "loan": 100.0,
+      "contact": 100.0,
+      "day": 100.0,
+      "month": 100.0,
+      "duration": 100.0,
+      "campaign": 100.0,
+      "pdays": 100.0,
+      "previous": 100.0,
+      "poutcome": 100.0,
+      "deposit": 100.0,
+      "remediation_timestamp": 100.0
+    },
+    "typeConsistency": {
+      "age": 0,
+      "job": 100,
+      "marital": 100,
+      "education": 100,
+      "default": 100,
+      "balance": 0,
+      "housing": 100,
+      "loan": 100,
+      "contact": 100,
+      "day": 0,
+      "month": 100,
+      "duration": 0,
+      "campaign": 0,
+      "pdays": 0,
+      "previous": 0,
+      "poutcome": 100,
+      "deposit": 100,
+      "remediation_timestamp": 100
+    },
+    "outlierDetection": {
+      "age": 97.35832217759929,
+      "balance": 87.70191878625613,
+      "day": 100.0,
+      "duration": 91.45917001338688,
+      "campaign": 94.61847389558233,
+      "pdays": 74.67202141900937,
+      "previous": 74.67202141900937
+    }
+  },
+  "ruleValidations": {},
+  "overallMetrics": {
+    "cleanlinessScore": 91.08624976094856,
+    "cleanlinessStatus": "ACCEPTABLE",
+    "certificationFlag": true,
+    "remainingIssuesCount": 0
+  }
+}

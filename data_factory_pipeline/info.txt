@@ -1,0 +1,6 @@
+selected resource name:		pipeline2
+selected resource type:		pipeline
+factory name:			DataQualityFactory11
+factory location:		eastus
+subscription id:		b88a852e-9578-4ce1-8f21-405da21711be
+time of download (UTC):		Thu, 03 Apr 2025 15:02:21 GMT

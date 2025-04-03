@@ -1,0 +1,12 @@
+{
+  "name": "DataQualityBlobStorage",
+  "type": "Microsoft.DataFactory/factories/linkedservices",
+  "properties": {
+    "annotations": [],
+    "type": "AzureBlobStorage",
+    "typeProperties": {
+      "connectionString": "DefaultEndpointsProtocol=https;AccountName=<your-storage-account-name>;EndpointSuffix=core.windows.net;",
+      "encryptedCredential": "<REDACTED-FOR-GITHUB>"
+    }
+  }
+}

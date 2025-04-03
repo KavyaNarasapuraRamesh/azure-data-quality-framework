@@ -1,0 +1,28 @@
+{
+  "name": "trigger1",
+  "properties": {
+    "annotations": [],
+    "runtimeState": "Started",
+    "pipelines": [
+      {
+        "pipelineReference": {
+          "referenceName": "pipeline2",
+          "type": "PipelineReference"
+        },
+        "parameters": {
+          "fileName": "@triggerBody().fileName"
+        }
+      }
+    ],
+    "type": "BlobEventsTrigger",
+    "typeProperties": {
+      "blobPathBeginsWith": "/raw-data/blobs/",
+      "blobPathEndsWith": "_dirty.csv",
+      "ignoreEmptyBlobs": false,
+      "scope": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.Storage/storageAccounts/<your-storage-account>",
+      "events": [
+        "Microsoft.Storage.BlobCreated"
+      ]
+    }
+  }
+}

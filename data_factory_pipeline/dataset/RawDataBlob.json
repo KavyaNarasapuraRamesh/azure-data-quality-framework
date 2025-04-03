@@ -1,0 +1,96 @@
+{
+    "name": "RawDataBlob",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "DataQualityBlobStorage",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "fileName": {
+                "type": "string"
+            },
+            "folderPath": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": {
+                    "value": "@dataset().fileName",
+                    "type": "Expression"
+                },
+                "container": "raw-data"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": [
+            {
+                "name": "age",
+                "type": "String"
+            },
+            {
+                "name": "workclass",
+                "type": "String"
+            },
+            {
+                "name": "fnlwgt",
+                "type": "String"
+            },
+            {
+                "name": "education",
+                "type": "String"
+            },
+            {
+                "name": "education.num",
+                "type": "String"
+            },
+            {
+                "name": "marital.status",
+                "type": "String"
+            },
+            {
+                "name": "occupation",
+                "type": "String"
+            },
+            {
+                "name": "relationship",
+                "type": "String"
+            },
+            {
+                "name": "race",
+                "type": "String"
+            },
+            {
+                "name": "sex",
+                "type": "String"
+            },
+            {
+                "name": "capital.gain",
+                "type": "String"
+            },
+            {
+                "name": "capital.loss",
+                "type": "String"
+            },
+            {
+                "name": "hours.per.week",
+                "type": "String"
+            },
+            {
+                "name": "native.country",
+                "type": "String"
+            },
+            {
+                "name": "income",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

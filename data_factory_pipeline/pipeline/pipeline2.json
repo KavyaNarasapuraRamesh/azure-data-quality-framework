@@ -1,0 +1,205 @@
+{
+    "name": "pipeline2",
+    "properties": {
+        "activities": [
+            {
+                "name": "Get_Metadata_DirtyFile",
+                "type": "GetMetadata",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "RawDataBlob",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "fileName": {
+                                "value": "@pipeline().parameters.fileName",
+                                "type": "Expression"
+                            },
+                            "folderPath": "/"
+                        }
+                    },
+                    "fieldList": [
+                        "exists",
+                        "lastModified"
+                    ],
+                    "storeSettings": {
+                        "type": "AzureBlobStorageReadSettings",
+                        "recursive": true,
+                        "enablePartitionDiscovery": false
+                    },
+                    "formatSettings": {
+                        "type": "DelimitedTextReadSettings"
+                    }
+                }
+            },
+            {
+                "name": "Set_Dataset_Name",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Get_Metadata_DirtyFile",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "datasetName",
+                    "value": {
+                        "value": "@replace(replace(pipeline().parameters.fileName, '_dirty.csv' , ''), '/', '')",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Get_Metadata_CleanFile",
+                "type": "GetMetadata",
+                "dependsOn": [
+                    {
+                        "activity": "Set_Dataset_Name",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "RawDataBlob",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "fileName": {
+                                "value": "@concat(variables('datasetName'), '_clean.csv')",
+                                "type": "Expression"
+                            },
+                            "folderPath": "/"
+                        }
+                    },
+                    "fieldList": [
+                        "exists"
+                    ],
+                    "storeSettings": {
+                        "type": "AzureBlobStorageReadSettings",
+                        "recursive": true,
+                        "enablePartitionDiscovery": false
+                    },
+                    "formatSettings": {
+                        "type": "DelimitedTextReadSettings"
+                    }
+                }
+            },
+            {
+                "name": "Check_Clean_File_Exists",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Get_Metadata_CleanFile",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@activity('Get_Metadata_CleanFile').output.exists",
+                        "type": "Expression"
+                    },
+                    "ifFalseActivities": [
+                        {
+                            "name": "Set_Error_Message",
+                            "type": "SetVariable",
+                            "dependsOn": [],
+                            "policy": {
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "ErrorMessage",
+                                "value": {
+                                    "value": "@concat('Clean file for dataset ',variables('datasetName'), ' is missing. Cannot process data quality checks.')",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ],
+                    "ifTrueActivities": [
+                        {
+                            "name": "Execute_Quality_Notebook",
+                            "type": "DatabricksNotebook",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "notebookPath": "/Users/knarasa@rockets.utoledo.edu/DataQualityFramework/DataProfiling-Updated",
+                                "baseParameters": {
+                                    "dataset_name": {
+                                        "value": "@variables('datasetName')",
+                                        "type": "Expression"
+                                    },
+                                    "run_mode": "pipeline"
+                                }
+                            },
+                            "linkedServiceName": {
+                                "referenceName": "DataQualityAzureDatabricks",
+                                "type": "LinkedServiceReference"
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "parameters": {
+            "fileName": {
+                "type": "string"
+            }
+        },
+        "variables": {
+            "datasetName": {
+                "type": "String"
+            },
+            "ErrorMessage": {
+                "type": "String"
+            },
+            "TriggerDetails": {
+                "type": "String"
+            },
+            "FileName": {
+                "type": "String"
+            },
+            "FullDetails": {
+                "type": "String"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2025-03-31T18:03:57Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

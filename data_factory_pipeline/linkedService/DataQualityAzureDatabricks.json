@@ -1,0 +1,14 @@
+{
+    "name": "DataQualityAzureDatabricks",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureDatabricks",
+        "typeProperties": {
+    "domain": "https://adb-693604961944072.12.azuredatabricks.net",
+    "existingClusterId": "<cluster-id-here>",
+    "encryptedCredential": "<REDACTED-FOR-GITHUB>"
+}
+
+    }
+}

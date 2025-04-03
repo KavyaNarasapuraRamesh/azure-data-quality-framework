@@ -1,0 +1,81 @@
+{
+  "validationId": "73a6064b-e232-4af2-8d20-0013e0480af3",
+  "runId": "20250331220118",
+  "datasetName": "adult_census",
+  "validationDate": "2025-03-31 22:02:49",
+  "inputMetrics": {
+    "dirtyCompleteness": 99.99918155218627,
+    "remediatedCompleteness": 99.99923270517463,
+    "dirtyNullCount": 4,
+    "remediatedNullCount": 4,
+    "issuesFixed": 0,
+    "remainingIssues": 4
+  },
+  "validationMetrics": {
+    "completenessScore": 39.999693082069854,
+    "columnCompletenessScore": 19.999846541034927,
+    "typeConsistencyScore": 15.0,
+    "outlierScore": 9.52780676447118,
+    "valueConsistencyScore": 8.76676590650993
+  },
+  "columnMetrics": {
+    "columnCompleteness": {
+      "age": 100.0,
+      "workclass": 99.99693082069855,
+      "fnlwgt": 100.0,
+      "education": 99.99386164139709,
+      "education_num": 100.0,
+      "marital_status": 100.0,
+      "occupation": 100.0,
+      "relationship": 100.0,
+      "race": 100.0,
+      "sex": 99.99693082069855,
+      "capital_gain": 100.0,
+      "capital_loss": 100.0,
+      "hours_per_week": 100.0,
+      "native_country": 100.0,
+      "income": 100.0,
+      "remediation_timestamp": 100.0
+    },
+    "typeConsistency": {
+      "age": 0,
+      "workclass": 100,
+      "fnlwgt": 0,
+      "education": 100,
+      "education_num": 0,
+      "marital_status": 100,
+      "occupation": 100,
+      "relationship": 100,
+      "race": 100,
+      "sex": 100,
+      "capital_gain": 100,
+      "capital_loss": 0,
+      "hours_per_week": 100,
+      "native_country": 100,
+      "income": 100,
+      "remediation_timestamp": 100
+    },
+    "outlierDetection": {
+      "age": 98.96568657540973,
+      "fnlwgt": 95.1261432692898,
+      "education_num": 91.69480081026333,
+      "capital_loss": 95.32563992388435
+    }
+  },
+  "ruleValidations": {
+    "sex": {
+      "name": "Valid Sex Values",
+      "score": 99.99693072649704
+    },
+    "workclass": {
+      "name": "Valid Workclass Values",
+      "score": 75.33838740370155
+    }
+  },
+  "overallMetrics": {
+    "cleanlinessScore": 93.29411229408589,
+    "cleanlinessStatus": "ACCEPTABLE",
+    "certificationFlag": true,
+    "remainingIssuesCount": 4
+  }
+}
